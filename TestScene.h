@@ -1,23 +1,29 @@
-#pragma once
+ï»¿#pragma once
 #include "Engine/GameObject.h"
+#include "SceneManager.h"
 
-//ƒeƒXƒgƒV[ƒ“‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+class SceneManager;
+
+//ãƒ†ã‚¹ãƒˆã‚·ãƒ¼ãƒ³ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 class TestScene : public GameObject
 {
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	//ˆø”Fparent  eƒIƒuƒWƒFƒNƒgiSceneManagerj
-	TestScene(GameObject* parent);
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	//å¼•æ•°ï¼šparent  è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆSceneManagerï¼‰
+	TestScene(GameObject* _parent);
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize() override;
 
-	//XV
+	//æ›´æ–°
 	void Update() override;
 
-	//•`‰æ
+	//æç”»
 	void Draw() override;
 
-	//ŠJ•ú
+	//é–‹æ”¾
 	void Release() override;
+
+private:
+	SceneManager* pSceneManager_;
 };

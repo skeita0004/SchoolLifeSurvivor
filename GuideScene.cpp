@@ -1,6 +1,9 @@
-#include "GuideScene.h"
+﻿#include "GuideScene.h"
+#include <typeinfo>
 
-GuideScene::GuideScene(GameObject* parent)
+GuideScene::GuideScene(GameObject* _parent) :
+    GameObject(_parent, typeid(this).name()),
+    pSceneManager_(nullptr)
 {
 }
 

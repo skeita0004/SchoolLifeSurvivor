@@ -1,27 +1,28 @@
-#include "TestScene.h"
+ï»¿#include "TestScene.h"
+#include <typeinfo>
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-TestScene::TestScene(GameObject * parent)
-	: GameObject(parent, "TestScene")
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+TestScene::TestScene(GameObject* _parent):
+    GameObject(_parent, "TestScene")
 {
 }
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 void TestScene::Initialize()
 {
 }
 
-//XV
+//æ›´æ–°
 void TestScene::Update()
 {
 }
 
-//•`‰æ
+//æç”»
 void TestScene::Draw()
 {
 }
 
-//ŠJ•ú
+//é–‹æ”¾
 void TestScene::Release()
 {
 }

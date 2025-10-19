@@ -1,20 +1,26 @@
-#pragma once
+ï»¿#pragma once
 #include "Engine/GameObject.h"
+#include "SceneManager.h"
+
+class SceneManager;
 
 class GuideScene : public GameObject
 {
 public:
-	GuideScene(GameObject* parent);
+	GuideScene(GameObject* _parent);
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize() override;
 
-	//XV
+	//æ›´æ–°
 	void Update() override;
 
-	//•`‰æ
+	//æç”»
 	void Draw() override;
 
-	//ŠJ•ú
+	//é–‹æ”¾
 	void Release() override;
+
+private:
+	SceneManager* pSceneManager_;
 };

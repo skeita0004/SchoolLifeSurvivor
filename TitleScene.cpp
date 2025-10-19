@@ -1,6 +1,9 @@
-#include "TitleScene.h"
+﻿#include "TitleScene.h"
+#include <typeinfo>
 
-TitleScene::TitleScene(GameObject* parent)
+TitleScene::TitleScene(GameObject* _parent) :
+    GameObject(_parent, typeid(this).name()),
+    pSceneManager_(nullptr)
 {
 }
 

@@ -1,6 +1,9 @@
-#include "ClearScene.h"
+﻿#include "ClearScene.h"
+#include <typeinfo>
 
-ClearScene::ClearScene(GameObject* parent)
+ClearScene::ClearScene(GameObject* _parent):
+    GameObject(_parent, typeid(this).name()),
+    pSceneManager_(nullptr)
 {
 }
 

@@ -1,6 +1,9 @@
-#include "PlayScene.h"
+﻿#include "PlayScene.h"
+#include <typeinfo>
 
-PlayScene::PlayScene(GameObject* parent)
+PlayScene::PlayScene(GameObject* _parent):
+    GameObject(_parent, typeid(this).name()),
+    pSceneManager_(nullptr)
 {
 }
 

@@ -1,6 +1,9 @@
-#include "OverScene.h"
+﻿#include "OverScene.h"
+#include <typeinfo>
 
-OverScene::OverScene(GameObject* parent)
+OverScene::OverScene(GameObject* _parent) :
+    GameObject(_parent, typeid(this).name()),
+    pSceneManager_(nullptr)
 {
 }
 
