@@ -1,4 +1,4 @@
-#include "sceneManager.h"
+#include "SceneManager.h"
 
 #include "../TitleScene.h"
 #include "../GuideScene.h"
