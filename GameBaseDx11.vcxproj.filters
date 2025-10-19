@@ -97,6 +97,21 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="OverScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -169,6 +184,21 @@
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="OverScene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

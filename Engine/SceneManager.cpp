@@ -1,5 +1,10 @@
 #include "sceneManager.h"
 
+#include "../TitleScene.h"
+#include "../GuideScene.h"
+#include "../PlayScene.h"
+#include "../OverScene.h"
+#include "../ClearScene.h"
 #include "../TestScene.h"
 #include "Model.h"
 #include "Image.h"
@@ -16,7 +21,7 @@ SceneManager::SceneManager(GameObject * parent)
 void SceneManager::Initialize()
 {
 	//Å‰‚ÌƒV[ƒ“‚ğ€”õ
-	currentSceneID_ = SCENE_ID_TEST;
+	currentSceneID_ = SCENE_ID_TITLE;
 	nextSceneID_ = currentSceneID_;
 	Instantiate<TestScene>(this);
 }
