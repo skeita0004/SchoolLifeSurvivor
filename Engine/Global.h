@@ -24,6 +24,16 @@ static inline void SafeDelete(TYPE* _ptr)
 }
 
 template<typename TYPE>
+static inline void SafeDeleteArray(TYPE* _ptr)
+{
+	if (_ptr != nullptr)
+	{
+		delete[] _ptr;
+		_ptr = nullptr;
+	}
+}
+
+template<typename TYPE>
 static inline void SafeRelease(TYPE* _ptr)
 {
 	if (HasRelease<TYPE>)
