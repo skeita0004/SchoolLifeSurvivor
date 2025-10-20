@@ -1,5 +1,4 @@
 ﻿#include "TestScene.h"
-#include <typeinfo>
 
 //コンストラクタ
 TestScene::TestScene(GameObject* _parent):

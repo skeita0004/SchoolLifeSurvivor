@@ -1,18 +1,29 @@
 ﻿#include "PlayScene.h"
-#include <typeinfo>
+#include "Input.h"
+#include "Sprite.h"
 
 PlayScene::PlayScene(GameObject* _parent):
-    GameObject(_parent, typeid(this).name()),
+    GameObject(_parent, "PlayScene"),
     pSceneManager_(nullptr)
 {
 }
 
 void PlayScene::Initialize()
 {
+    pSceneManager_ = static_cast<SceneManager*>(FindObject("SceneManager"));
 }
 
 void PlayScene::Update()
 {
+    if (Input::IsKeyDown(DIK_O))
+    {
+        pSceneManager_->ChangeScene(SCENE_ID_OVER);
+    }
+
+    if (Input::IsKeyDown(DIK_C))
+    {
+        pSceneManager_->ChangeScene(SCENE_ID_CLEAR);
+    }
 }
 
 void PlayScene::Draw()

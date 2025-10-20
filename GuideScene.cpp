@@ -1,18 +1,28 @@
 ﻿#include "GuideScene.h"
-#include <typeinfo>
+#include "Input.h"
 
 GuideScene::GuideScene(GameObject* _parent) :
-    GameObject(_parent, typeid(this).name()),
+    GameObject(_parent, "GuideScene"),
     pSceneManager_(nullptr)
 {
 }
 
 void GuideScene::Initialize()
 {
+    pSceneManager_ = static_cast<SceneManager*>(FindObject("SceneManager"));
 }
 
 void GuideScene::Update()
 {
+    if (Input::IsKeyDown(DIK_T))
+    {
+        pSceneManager_->ChangeScene(SCENE_ID_TITLE);
+    }
+
+    if (Input::IsKeyDown(DIK_P))
+    {
+        pSceneManager_->ChangeScene(SCENE_ID_PLAY);
+    }
 }
 
 void GuideScene::Draw()

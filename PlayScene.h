@@ -24,4 +24,5 @@ public:
 
 private:
 	SceneManager* pSceneManager_;
+    int hBackGround_;
 };
