@@ -2,8 +2,8 @@
 #include "Engine/GameObject.h"
 #include "SceneManager.h"
 
-
 class SceneManager;
+class BackGround;
 
 class PlayScene : public GameObject
 {
@@ -25,4 +25,5 @@ public:
 private:
 	SceneManager* pSceneManager_;
     int hBackGround_;
+    BackGround* pBackGround_;
 };

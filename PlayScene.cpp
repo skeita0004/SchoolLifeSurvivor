@@ -1,16 +1,25 @@
 ﻿#include "PlayScene.h"
+#include "Stage.h"
+#include "BackGround.h"
 #include "Input.h"
 #include "Sprite.h"
 
 PlayScene::PlayScene(GameObject* _parent):
     GameObject(_parent, "PlayScene"),
-    pSceneManager_(nullptr)
+    pSceneManager_(nullptr),
+    pBackGround_(nullptr)
 {
 }
 
 void PlayScene::Initialize()
 {
     pSceneManager_ = static_cast<SceneManager*>(FindObject("SceneManager"));
+    pBackGround_ = Instantiate<BackGround>(this);
+
+    // ここマジックナンバーだよ
+    pBackGround_->SetBackGround("playSceneBG.png");
+
+    Instantiate<Stage>(this);
 }
 
 void PlayScene::Update()
