@@ -1,0 +1,21 @@
+﻿#pragma once
+#include "Engine/GameObject.h"
+#include "Model.h"
+
+class Player : public GameObject
+{
+public:
+    Player(GameObject* _parent);
+    ~Player();
+
+    void Initialize() override;
+
+    void Update() override;
+
+    void Draw() override;
+
+    void Release() override;
+
+private:
+    int hModel_;
+};
