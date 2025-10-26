@@ -1,17 +1,14 @@
-#include <Windows.h>
+ï»¿#include <Windows.h>
 #include "CsvReader.h"
 
-
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 CsvReader::CsvReader()
 {
 	data_.clear();
 }
 
-//ƒfƒXƒgƒ‰ƒNƒ^
 CsvReader::~CsvReader()
 {
-	//‘Sƒf[ƒ^‚ğŠJ•ú
+	//å…¨ãƒ‡ãƒ¼ã‚¿ã‚’é–‹æ”¾
 	for (int y = 0; y < data_.size(); y++)
 	{
 		for (int x = 0; x < data_[y].size(); x++)
@@ -21,111 +18,129 @@ CsvReader::~CsvReader()
 	}
 }
 
-//CSVƒtƒ@ƒCƒ‹‚Ìƒ[ƒh
-bool CsvReader::Load(std::string fileName)
+bool CsvReader::Load(std::string _filename)
 {
-	//ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	HANDLE hFile;
-	hFile = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	hFile = CreateFile(_filename.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 
-	//ŠJ‚¯‚È‚©‚Á‚½
+	//é–‹ã‘ãªã‹ã£ãŸ
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		std::string message = "u" + fileName + "v‚ªŠJ‚¯‚Ü‚¹‚ñB\nŠJ‚¢‚Ä‚¢‚éê‡‚Í•Â‚¶‚Ä‚­‚¾‚³‚¢B";
-		MessageBox(NULL, message.c_str(), "BaseProjDx9ƒGƒ‰[", MB_OK);
+		std::string message = "ã€Œ" + _filename + "ã€ãŒé–‹ã‘ã¾ã›ã‚“ã€‚\né–‹ã„ã¦ã„ã‚‹å ´åˆã¯é–‰ã˜ã¦ãã ã•ã„ã€‚";
+		MessageBox(nullptr, message.c_str(), "BaseProjDx9ã‚¨ãƒ©ãƒ¼", MB_OK);
 
 		return false;
 	}
 
-	//ƒtƒ@ƒCƒ‹‚ÌƒTƒCƒYi•¶š”j‚ğ’²‚×‚é
-	DWORD fileSize = GetFileSize(hFile, NULL);
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºï¼ˆæ–‡å­—æ•°ï¼‰ã‚’èª¿ã¹ã‚‹
+	DWORD fileSize = GetFileSize(hFile, nullptr);
 
-	//‚·‚×‚Ä‚Ì•¶š‚ğ“ü‚ê‚ç‚ê‚é”z—ñ‚ğ—pˆÓ
+	//ã™ã¹ã¦ã®æ–‡å­—ã‚’å…¥ã‚Œã‚‰ã‚Œã‚‹é…åˆ—ã‚’ç”¨æ„
 	char* temp;
 	temp = new char[fileSize];
 
-	//ƒtƒ@ƒCƒ‹‚Ì’†g‚ğ”z—ñ‚É“Ç‚İ‚Ş
+	//ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­èº«ã‚’é…åˆ—ã«èª­ã¿è¾¼ã‚€
 	DWORD dwBytes = 0;
-	ReadFile(hFile, temp, fileSize, &dwBytes, NULL);
+    if (ReadFile(hFile, temp, fileSize, &dwBytes, nullptr))
+    {
+        return false;
+    }
 
-	//ŠJ‚¢‚½ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	//é–‹ã„ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 	CloseHandle(hFile);
 
-	//1s‚Ìƒf[ƒ^‚ğ“ü‚ê‚é”z—ñ
+	//1è¡Œã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œã‚‹é…åˆ—
 	std::vector<std::string>	line;
 
-	//’²‚×‚é•¶š‚ÌˆÊ’u
+	//èª¿ã¹ã‚‹æ–‡å­—ã®ä½ç½®
 	DWORD index = 0;
 
-	//ÅŒã‚Ì•¶š‚Ü‚ÅŒJ‚è•Ô‚·
+	//æœ€å¾Œã®æ–‡å­—ã¾ã§ç¹°ã‚Šè¿”ã™
 	while (index < fileSize)
 	{
-		//index•¶š–Ú‚©‚çu,v‚©u‰üsv‚Ü‚Å‚Ì•¶š—ñ‚ğæ“¾
+		//indexæ–‡å­—ç›®ã‹ã‚‰ã€Œ,ã€ã‹ã€Œæ”¹è¡Œã€ã¾ã§ã®æ–‡å­—åˆ—ã‚’å–å¾—
 		std::string val;
 		GetToComma(&val, temp, &index);
 
-		//•¶š”‚ª0‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚Ís––
+		//æ–‡å­—æ•°ãŒ0ã ã£ãŸã¨ã„ã†ã“ã¨ã¯è¡Œæœ«
 		if (val.length() - 1 == 0)
 		{
-			//_data‚É1s•ª’Ç‰Á
+			//_dataã«1è¡Œåˆ†è¿½åŠ 
 			data_.push_back(line);
 
-			//1sƒf[ƒ^‚ğƒNƒŠƒA
+			//1è¡Œãƒ‡ãƒ¼ã‚¿ã‚’ã‚¯ãƒªã‚¢
 			line.clear();
 
 			//index++;
 			continue;
 		}
 
-		//1s•ª‚Ìƒf[ƒ^‚É’Ç‰Á
+		//1è¡Œåˆ†ã®ãƒ‡ãƒ¼ã‚¿ã«è¿½åŠ 
 		line.push_back(val);
 	}
 
-	//“Ç‚İ‚ñ‚¾ƒf[ƒ^‚ÍŠJ•ú‚·‚é
+	//èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã¯é–‹æ”¾ã™ã‚‹
 	delete[] temp;
 
-	//¬Œ÷
+	//æˆåŠŸ
 	return true;
 }
 
-//u,v‚©u‰üsv‚Ü‚Å‚Ì•¶š—ñ‚ğæ“¾
-void CsvReader::GetToComma(std::string *result, std::string data, DWORD* index)
+void CsvReader::GetToComma(std::string* _result, std::string _data, DWORD* _index)
 {
-	//u,v‚Ü‚Åˆê•¶š‚¸‚Âresult‚É“ü‚ê‚é
-	while (data[*index] != ',' && data[*index] != '\n'&& data[*index] != '\r')
+	//ã€Œ,ã€ã¾ã§ä¸€æ–‡å­—ãšã¤resultã«å…¥ã‚Œã‚‹
+	while (_data[*_index] != ',' && _data[*_index] != '\n'&& _data[*_index] != '\r')
 	{
-		*result += data[*index];
-		(*index)++;
+		*_result += _data[*_index];
+		(*_index)++;
 	}
 
-	//ÅŒã‚Éu\0v‚ğ•t‚¯‚é
-	*result += '\0';
-	(*index)++;
+	//æœ€å¾Œã«ã€Œ\0ã€ã‚’ä»˜ã‘ã‚‹
+	*_result += '\0';
+	(*_index)++;
 }
 
-//w’è‚µ‚½ˆÊ’u‚Ìƒf[ƒ^‚ğ•¶š—ñ‚Åæ“¾
-std::string CsvReader::GetString(DWORD x, DWORD y)
+std::string CsvReader::GetString(DWORD _x, DWORD _y)
 {
-	if (x < 0 || x >= GetWidth() || y < 0 || y >= GetHeight())
+    if (_x < 0 || _x >= GetWidth() || _y < 0 || _y >= GetHeight())
+    {
 		return "";
+    }
 
-	return data_[y][x];
+	return data_[_y][_x];
 }
 
-//w’è‚µ‚½ˆÊ’u‚Ìƒf[ƒ^‚ğ®”‚Åæ“¾
-int CsvReader::GetValue(DWORD x, DWORD y)
+int CsvReader::GetIntValue(DWORD _x, DWORD _y)
 {
-	return atoi(GetString(x, y).c_str());
+    return atoi(GetString(_x, _y).c_str());
+}
+int CsvReader::GetIntValue(int _x, int _y)
+{
+    return GetIntValue(static_cast<DWORD>(_x), static_cast<DWORD>(_y));
 }
 
-//ƒtƒ@ƒCƒ‹‚Ì—ñ”‚ğæ“¾
 size_t CsvReader::GetWidth()
 {
 	return data_[0].size();
 }
 
-//ƒtƒ@ƒCƒ‹‚Ìs”‚ğæ“¾
 size_t CsvReader::GetHeight()
 {
 	return data_.size();
+}
+
+std::vector<std::vector<int>> CsvReader::GetIntData()
+{
+    std::vector<std::vector<int>> retVal(0, std::vector<int>(0));
+
+    for (int y = 0; y < data_.size(); y++)
+    {
+        for (int x = 0; x < data_[y].size(); x++)
+        {
+            retVal[y][x] = GetIntValue(y, x);
+        }
+    }
+
+    return retVal;
 }
