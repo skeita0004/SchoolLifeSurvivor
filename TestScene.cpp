@@ -2,7 +2,8 @@
 
 //コンストラクタ
 TestScene::TestScene(GameObject* _parent):
-    GameObject(_parent, "TestScene")
+    GameObject(_parent, "TestScene"),
+    pSceneManager_(nullptr)
 {
 }
 
