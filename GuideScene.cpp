@@ -1,4 +1,5 @@
 ﻿#include "GuideScene.h"
+#include "Input.h"
 #include <typeinfo>
 
 GuideScene::GuideScene(GameObject* _parent) :
