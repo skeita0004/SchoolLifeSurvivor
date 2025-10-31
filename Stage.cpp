@@ -2,11 +2,44 @@
 #include <vector>
 #include "CsvReader.h"
 #include "Player.h"
+#include "Model.h"
 
 namespace
 {
+    enum struct BlockType : int
+    {
+        B_GRASS = 0,
+        B_BRICK,
+        B_CLOUD_L,
+        B_CLOUD_MID,
+        B_CLOUD_R,
+        B_AIR,
+
+        E_GAME = 10,
+        E_PHONE,
+
+        I_BED = 20,
+        I_CLASS,
+        I_HOMEWORK,
+        I_COMPUTER
+    };
+
+    struct StageObject
+    {
+        int       hModel;
+        Transform transform;
+    };
+
+    const std::vector<std::string> objectPaths
+    {
+        "grass.fbx"
+    };
+
     // 複数ステージを用意（やらないけど）するならメンバ変数にすること。
-    std::vector<std::vector<int>> stageMap(0, std::vector<int>(0));
+    std::vector<std::vector<StageObject>> 
+        stageMap(0, std::vector<StageObject>(0));
+
+    const std::string MAP_FILE_NAME{"stageMap.csv"};
 }
 
 Stage::Stage(GameObject* _parent):
@@ -22,7 +55,14 @@ void Stage::Initialize()
 {
     Instantiate<Player>(GetParent());
     CsvReader stageData;
-    //stageData.Load("map/map01.csv");
+    stageData.Load(MAP_FILE_NAME);
+
+    stageMap.resize(stageData.GetHeight());
+
+    for (int i = 0; i < stageMap.size(); i++)
+    {
+        stageMap[i].resize(stageData.GetWidth());
+    }
 
     for (int y = 0; y < stageData.GetHeight(); y++)
     {
@@ -32,27 +72,30 @@ void Stage::Initialize()
             
             switch (block) 
             {
-            case Stage::BlockType::B_GRASS:
+            using enum BlockType;
+            case BlockType::B_GRASS:
+                stageMap[y][x].hModel = Model::Load(objectPaths[(int)block]);
+                stageMap[y][x].transform.position_ = XMFLOAT3(x, y, 0);
                 break;
-            case Stage::BlockType::B_BRICK:
+            case BlockType::B_BRICK:
                 break;
-            case Stage::BlockType::B_CLOUD_L:
+            case BlockType::B_CLOUD_L:
                 break;
-            case Stage::BlockType::B_CLOUD_MID:
+            case BlockType::B_CLOUD_MID:
                 break;
-            case Stage::BlockType::B_CLOUD_R:
+            case BlockType::B_CLOUD_R:
                 break;
-            case Stage::BlockType::E_GAME:
+            case BlockType::E_GAME:
                 break;
-            case Stage::BlockType::E_PHONE:
+            case BlockType::E_PHONE:
                 break;
-            case Stage::BlockType::I_BED:
+            case BlockType::I_BED:
                 break;
-            case Stage::BlockType::I_CLASS:
+            case BlockType::I_CLASS:
                 break;
-            case Stage::BlockType::I_HOMEWORK:
+            case BlockType::I_HOMEWORK:
                 break;
-            case Stage::BlockType::I_COMPUTER:
+            case BlockType::I_COMPUTER:
                 break;
             default:
                 break;
@@ -67,6 +110,7 @@ void Stage::Update()
 
 void Stage::Draw()
 {
+    for (int )
 }
 
 void Stage::Release()
