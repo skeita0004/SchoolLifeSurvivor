@@ -42,10 +42,10 @@ bool CsvReader::Load(std::string _filename)
 
 	//ファイルの中身を配列に読み込む
 	DWORD dwBytes = 0;
-    if (ReadFile(hFile, temp, fileSize, &dwBytes, nullptr))
-    {
-        return false;
-    }
+    ReadFile(hFile, temp, fileSize, &dwBytes, nullptr);
+    //{
+    //     return false;
+    //}
 
 	//開いたファイルを閉じる
 	CloseHandle(hFile);
