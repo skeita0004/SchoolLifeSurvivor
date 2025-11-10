@@ -118,8 +118,12 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -217,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>01Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

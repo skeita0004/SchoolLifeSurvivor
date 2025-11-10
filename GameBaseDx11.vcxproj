@@ -192,6 +192,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\BillBoard.hlsl">

@@ -6,28 +6,13 @@
 
 namespace
 {
-    enum struct BlockType : int
-    {
-        B_GRASS = 0,
-        B_BRICK,
-        B_CLOUD_L,
-        B_CLOUD_MID,
-        B_CLOUD_R,
-        B_AIR,
 
-        E_GAME = 10,
-        E_PHONE,
-
-        I_BED = 20,
-        I_CLASS,
-        I_HOMEWORK,
-        I_COMPUTER
-    };
 
     struct StageObject
     {
-        int       hModel;
-        Transform transform;
+        Stage::BlockType blockType;
+        int              hModel;
+        Transform        transform;
     };
 
     const std::vector<std::string> objectPaths
@@ -74,6 +59,7 @@ void Stage::Initialize()
             {
             using enum BlockType;
             case BlockType::B_GRASS:
+                stageMap[y][x].blockType = block;
                 stageMap[y][x].hModel = Model::Load(objectPaths[(int)block]);
                 stageMap[y][x].transform.position_ = XMFLOAT3(x, y, 0);
                 break;
@@ -110,9 +96,38 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-    for (int )
+    for (int y = 0; y < stageMap.size(); y++)
+    {
+        for (int x = 0; x < stageMap[y].size(); x++)
+        {
+            if (stageMap[y][x].hModel == 0)
+            {
+                continue;
+            }
+            int hModel = stageMap[y][x].hModel;
+            Transform transform = stageMap[y][x].transform;
+            transform.position_ = { (float)x * 2, (float)y * 2 - 14.f, 0 };
+            Model::SetTransform(hModel, transform);
+            Model::Draw(hModel);
+        }
+    }
 }
 
 void Stage::Release()
 {
+}
+
+int Stage::GetModelHandle(BlockType _type)
+{
+    for (int y = 0; y < stageMap.size(); y++)
+    {
+        for (int x = 0; x < stageMap[y].size(); x++)
+        {
+            StageObject object = stageMap[y][x];
+            if (object.blockType == _type)
+            {
+                return object.hModel;
+            }
+        }
+    }
 }
