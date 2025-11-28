@@ -15,7 +15,8 @@ Player::~Player()
 
 void Player::Initialize()
 {
-    hModel_ = Model::Load("player.fbx");
+    transform_.position_ = XMFLOAT3(0, 6, 0);
+    hModel_ = Model::Load("models/player.fbx");
 }
 
 void Player::Update()
@@ -28,7 +29,7 @@ void Player::Update()
     rCData.dir = XMFLOAT3(0, -1, 0);
     Model::RayCast(grassModelHandle, &rCData);
 
-    transform_.position_.y -= rCData.dist;
+    //transform_.position_.y -= rCData.dist;
 
     if (Input::IsKey(DIK_A))
     {
@@ -42,8 +43,8 @@ void Player::Update()
     XMVECTOR vPos;
     vPos = XMLoadFloat3(&transform_.position_);
 
-    XMVECTOR vCamPos    = vPos + XMVectorSet(2, 14, -40, 0);
-    XMVECTOR vCamTarget = vPos + XMVectorSet(2, 14, 0, 0);
+    XMVECTOR vCamPos    = vPos + XMVectorSet(2, 12, -40, 0);
+    XMVECTOR vCamTarget = vPos + XMVectorSet(2, 12, 0, 0);
 
     XMFLOAT3 camPos;
     XMFLOAT3 camTarget;

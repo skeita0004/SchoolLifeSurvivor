@@ -15,11 +15,11 @@ void PlayScene::Initialize()
 {
     pSceneManager_ = static_cast<SceneManager*>(FindObject("SceneManager"));
     pBackGround_ = Instantiate<BackGround>(this);
-
     // ここマジックナンバーだよ
-    pBackGround_->SetBackGround("playSceneBG.png");
-
+    pBackGround_->SetBackGround("images/playSceneBG.png");
     Instantiate<Stage>(this);
+
+
 }
 
 void PlayScene::Update()
