@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Engine/GameObject.h"
-#include "SceneManager.h"
 
 class SceneManager;
 class BackGround;
@@ -24,6 +23,5 @@ public:
 
 private:
 	SceneManager* pSceneManager_;
-    int hBackGround_;
     BackGround* pBackGround_;
 };

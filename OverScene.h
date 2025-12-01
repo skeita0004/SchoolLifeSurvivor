@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Engine/GameObject.h"
-#include "SceneManager.h"
 
 class SceneManager;
+class BackGround;
 
 class OverScene : public GameObject
 {
@@ -23,4 +23,5 @@ public:
 
 private:
 	SceneManager* pSceneManager_;
+    BackGround* pBackGround_;
 };

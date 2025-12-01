@@ -21,9 +21,9 @@ SceneManager::SceneManager(GameObject * parent)
 void SceneManager::Initialize()
 {
 	//最初のシーンを準備
-	currentSceneID_ = SCENE_ID_PLAY;
+	currentSceneID_ = SCENE_ID_TITLE;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<PlayScene>(this);
+	Instantiate<TitleScene>(this);
 }
 
 //更新
@@ -41,12 +41,6 @@ void SceneManager::Update()
 		Image::AllRelease();
 
 		//次のシーンを作成
-		switch (nextSceneID_)
-		{
-		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
-
-		}
-
         switch (nextSceneID_)
         {
         case SCENE_ID_TITLE:

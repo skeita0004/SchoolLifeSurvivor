@@ -3,6 +3,8 @@
 #include "BackGround.h"
 #include "Input.h"
 #include "Sprite.h"
+#include "SceneManager.h"
+#include "Player.h"
 
 PlayScene::PlayScene(GameObject* _parent):
     GameObject(_parent, "PlayScene"),
@@ -15,23 +17,17 @@ void PlayScene::Initialize()
 {
     pSceneManager_ = static_cast<SceneManager*>(FindObject("SceneManager"));
     pBackGround_ = Instantiate<BackGround>(this);
-    // ここマジックナンバーだよ
-    pBackGround_->SetBackGround("images/playSceneBG.png");
+    pBackGround_->SetBackGround("images/play_bg.png");
     Instantiate<Stage>(this);
-
-
 }
 
 void PlayScene::Update()
 {
-    if (Input::IsKeyDown(DIK_O))
+    static Player* pPlayer = static_cast<Player*>(FindObject("Player"));
+    if (pPlayer->GetFatigueLevel() >= 100)
     {
+        pPlayer->KillMe();
         pSceneManager_->ChangeScene(SCENE_ID_OVER);
-    }
-
-    if (Input::IsKeyDown(DIK_C))
-    {
-        pSceneManager_->ChangeScene(SCENE_ID_CLEAR);
     }
 }
 

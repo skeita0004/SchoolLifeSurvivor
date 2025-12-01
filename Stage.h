@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "GameObject.h"
+#include <vector>
+
+class Text;
 
 class Stage : public GameObject
 {
@@ -14,12 +17,8 @@ public:
 
     enum struct BlockType : int
     {
-        B_GRASS = 0,
+        B_AIR = 0,
         B_BRICK,
-        B_CLOUD_L,
-        B_CLOUD_MID,
-        B_CLOUD_R,
-        B_AIR,
 
         E_GAME = 10,
         E_PHONE,
@@ -27,11 +26,27 @@ public:
         I_BED = 20,
         I_CLASS,
         I_HOMEWORK,
-        I_COMPUTER
+        I_COMPUTER,
+
+        PLAYER = 30,
+        GOAL,
     };
 
-    int GetModelHandle(BlockType _type);
+    // タイル数（座標→タイル変換用）
+    int GetWidth() const { return stageMap[0].size(); }
+    int GetHeight() const { return stageMap.size(); }
 
+    BlockType GetTile(int tx, int ty) const;
 private:
+    struct StageObject
+    {
+        BlockType blockType;
+        int              hModel;
+        Transform        transform;
+    };
 
+    std::vector<std::vector<StageObject>> stageMap;
+
+    Text* pTextFatigueLevel_;
+    Text* pTextGraduationLimit_;
 };
